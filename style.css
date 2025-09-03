@@ -83,7 +83,7 @@ h1{margin:.15em 0 .3em; font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:1.05}
 .meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:14px}
 .tag{font:600 .8rem/1.9 ui-sans-serif, system-ui; color:#cfe4f7; background:#7c5cff26; border:1px solid #7c5cff44; padding:4px 10px; border-radius:999px}
 
-.section{margin:32px 0 18px}
+.section{margin:32px 0 18px; scroll-margin-top: 80px}
 .section h2{font-size:1.6rem; margin:0 0 8px}
 .muted{color:var(--muted)}
 
@@ -93,6 +93,7 @@ h1{margin:.15em 0 .3em; font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:1.05}
 .project{
   position:relative; overflow:hidden; transform:translateZ(0);
   transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  padding-bottom: 60px;
 }
 .project::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, #00000066 100%); opacity:0; transition:opacity .25s ease}
 .project .overlay{position:absolute; left:12px; right:12px; bottom:12px; display:flex; gap:8px; align-items:center; justify-content:space-between; opacity:0; transform:translateY(8px); transition:opacity .2s ease, transform .2s ease}
@@ -183,6 +184,7 @@ h1{margin:.15em 0 .3em; font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:1.05}
   .kicker{font-size:.8rem}
   .lead{font-size:1rem}
   .project .overlay{left:8px; right:8px; bottom:8px}
+  .project{padding-bottom: 50px}
   .thumb{height:120px}
 }
 
