@@ -27,7 +27,7 @@ Built with **HTML, CSS, JavaScript, and Java (OOPs)**, the portfolio highlights 
 ---
 
 ## 🔹 Live Demo
-👉 [Visit My Portfolio](https://yourusername.github.io/my-portfolio/)  
+👉 [Visit My Portfolio](https://ranjeetkumar228.github.io/My-Portfolio-/)  
 
 ---
 
