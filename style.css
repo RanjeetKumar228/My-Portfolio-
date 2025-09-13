@@ -95,8 +95,8 @@ h1{margin:.15em 0 .3em; font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:1.05}
   transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
   padding-bottom: 60px;
 }
-.project::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, #00000066 100%); opacity:0; transition:opacity .25s ease}
-.project .overlay{position:absolute; left:12px; right:12px; bottom:12px; display:flex; gap:8px; align-items:center; justify-content:space-between; opacity:0; transform:translateY(8px); transition:opacity .2s ease, transform .2s ease}
+.project::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, #00000066 100%); opacity:0; transition:opacity .25s ease; pointer-events:none; z-index:1}
+.project .overlay{position:absolute; left:12px; right:12px; bottom:12px; display:flex; gap:8px; align-items:center; justify-content:space-between; opacity:0; transform:translateY(8px); transition:opacity .2s ease, transform .2s ease; z-index:2; pointer-events:auto}
 .project .actions{display:flex; gap:8px}
 .project .actions .btn{padding:8px 12px; border-radius:10px; font-size:.95rem}
 .project:hover::after{opacity:1}
@@ -193,6 +193,10 @@ h1{margin:.15em 0 .3em; font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:1.05}
   .project::after{opacity:1}
   .project .overlay{opacity:1; transform:none}
 }
+/* Modal styles removed — using direct links for details to keep CSS lean */
+/* Make action buttons clearer */
+.project .actions .btn{background:#ffffff12; border:1px solid #ffffff22}
+.project .actions .btn.primary{background:linear-gradient(135deg,#4f3eff,#00c09a)}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){

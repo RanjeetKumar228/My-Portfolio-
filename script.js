@@ -23,9 +23,32 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   });
 });
 
+// Project data with details and live URLs
+const projects = [
+  {
+    details: "https://github.com/RanjeetKumar228/BMI-Calculator/blob/main/README.md",
+    live: "https://ranjeetkumar228.github.io/BMI-Calculator/"
+  },
+  {
+    details: "https://github.com/RanjeetKumar228/project-two-details", // Placeholder: Update with actual URL
+    live: "https://ranjeetkumar228.github.io/project-two-live" // Placeholder: Update with actual URL
+  },
+  {
+    details: "https://github.com/RanjeetKumar228/project-three-details", // Placeholder: Update with actual URL
+    live: "https://ranjeetkumar228.github.io/project-three-live" // Placeholder: Update with actual URL
+  }
+];
+
 // Add action overlay to project cards
-document.querySelectorAll('.project').forEach(card=>{
+document.querySelectorAll('.project').forEach((card, index)=>{
   card.setAttribute('data-tilt','');
+  // Prefer explicit data attributes on the article so adding a new project is copy-paste easy
+  const dataLive = card.dataset.live;
+  const dataDetails = card.dataset.details || card.dataset.detailId; // support both names
+  const fallback = projects[index] || { details: "#", live: "#" };
+  const liveUrl = dataLive || fallback.live;
+  const detailsUrl = dataDetails || fallback.details;
+
   const overlay = document.createElement('div');
   overlay.className = 'overlay';
   overlay.innerHTML = `
@@ -33,10 +56,19 @@ document.querySelectorAll('.project').forEach(card=>{
       <small class="muted">Project</small>
     </div>
     <div class="actions">
-      <a class="btn" href="#">Details</a>
-      <a class="btn primary" href="#">Live</a>
+      <a class="btn details-btn" href="${detailsUrl}" target="_blank" rel="noopener">Details</a>
+      <a class="btn primary" href="${liveUrl}" target="_blank" rel="noopener">Live</a>
     </div>`;
   card.appendChild(overlay);
+
+  // Allow keyboard users to open the first action with Enter when focused on the card
+  card.setAttribute('tabindex','0');
+  card.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter'){
+      const firstLink = card.querySelector('.actions a');
+      if(firstLink) firstLink.click();
+    }
+  });
 });
 
 // Subtle 3D tilt on pointer move (lightweight, respects reduce-motion)
@@ -53,3 +85,5 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     el.addEventListener('pointerleave', ()=>{ el.style.transform = ''; });
   });
 }
+
+
