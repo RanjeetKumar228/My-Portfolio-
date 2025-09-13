@@ -197,6 +197,8 @@ h1{margin:.15em 0 .3em; font-size:clamp(2.2rem, 4.5vw, 4rem); line-height:1.05}
 /* Make action buttons clearer */
 .project .actions .btn{background:#ffffff12; border:1px solid #ffffff22}
 .project .actions .btn.primary{background:linear-gradient(135deg,#4f3eff,#00c09a)}
+/* Ensure anchor taps are handled predictably on touch devices */
+.project .overlay a{touch-action:manipulation; -webkit-tap-highlight-color: rgba(255,255,255,0.06)}
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce){

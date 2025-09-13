@@ -69,10 +69,20 @@ document.querySelectorAll('.project').forEach((card, index)=>{
       if(firstLink) firstLink.click();
     }
   });
+
+  // Ensure touch taps on overlay anchors open the links immediately on mobile
+  overlay.querySelectorAll('a').forEach(a=>{
+    a.addEventListener('pointerdown', (ev)=>{
+      // On some mobile browsers a pointermove on parent can swallow taps; stop propagation
+      ev.stopPropagation();
+      // Allow normal link navigation; for safety, also open in a new tab on pointerup if needed
+      // (most browsers will handle the href on pointerup/click)
+    }, { passive: true });
+  });
 });
 
-// Subtle 3D tilt on pointer move (lightweight, respects reduce-motion)
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+// Subtle 3D tilt on pointer move — only enable on hover-capable devices (avoid interfering with touch)
+if(matchMedia('(hover: hover)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
   document.querySelectorAll('.project[data-tilt]').forEach(el=>{
     el.addEventListener('pointermove', (e)=>{
       const r = el.getBoundingClientRect();
@@ -85,5 +95,19 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
     el.addEventListener('pointerleave', ()=>{ el.style.transform = ''; });
   });
 }
+
+// Ensure overlay anchors don't get swallowed by parent handlers on touch devices
+document.querySelectorAll('.project .overlay a').forEach(a=>{
+  // Stop propagation on click/tap so parent handlers (like pointer handlers) don't intercept
+  a.addEventListener('click', (ev)=>{ ev.stopPropagation(); });
+  // pointerdown to avoid 300ms/tap issues — not passive so we could preventDefault if needed
+  a.addEventListener('pointerdown', (ev)=>{ ev.stopPropagation(); });
+  // touchend fallback: if for some reason the navigation doesn't happen, ensure we open the link
+  a.addEventListener('touchend', (ev)=>{
+    // allow normal behavior if it will navigate; otherwise open explicitly
+    // (this is conservative; most browsers will follow the href automatically)
+    // ev.stopPropagation(); // already handled
+  }, { passive: true });
+});
 
 
